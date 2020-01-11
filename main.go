@@ -17,6 +17,7 @@ func main() {
 	http.HandleFunc("/", RenderMainView)
 	http.HandleFunc("/auth", RenderAuthView)
 	http.HandleFunc("/auth/callback", Authenticate)
+	http.HandleFunc("/logins", RenderloginView)
 
 	log.Fatal(http.ListenAndServe(":8050", nil))
 }
@@ -29,7 +30,10 @@ func RenderTemplate(w http.ResponseWriter, name string, data interface{}) {
 // 메인 뷰 핸들러
 func RenderMainView(w http.ResponseWriter, r *http.Request) {
 }
-
+var userNames = "최준용"
+func RenderloginView(w http.ResponseWriter, r *http.Request) {
+	RenderTemplate(w, "logins.html",userNames)
+}
 // 랜덤 state 값을 가진 구글 로그인 링크를 렌더링 해주는 뷰 핸들러
 // 랜덤 state는 유저를 식별하는 용도로 사용된다
 func RenderAuthView(w http.ResponseWriter, r *http.Request) {
@@ -86,5 +90,5 @@ func Authenticate(w http.ResponseWriter, r *http.Request) {
 	session.Values["username"] = authUser.Name
 	session.Save(r, w)
 
-	http.Redirect(w, r, "/", http.StatusFound)
+	http.Redirect(w, r, "/logins", http.StatusFound)
 }
