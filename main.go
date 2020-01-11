@@ -18,7 +18,7 @@ func main() {
 	http.HandleFunc("/auth", RenderAuthView)
 	http.HandleFunc("/auth/callback", Authenticate)
 
-	log.Fatal(http.ListenAndServe(":1333", nil))
+	log.Fatal(http.ListenAndServe(":8050", nil))
 }
 
 func RenderTemplate(w http.ResponseWriter, name string, data interface{}) {

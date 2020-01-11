@@ -8,11 +8,14 @@ import (
 	"golang.org/x/oauth2/google"
 )
 
-// auth.go
 
+type User struct {
+    Name  string `json:"name"`
+    Email string `json:"email"`
+}
 // auth.go
 const (
-	CallBackURL = "http://localhost:1333/auth/callback"
+	CallBackURL = "http://localhost:8050/auth/callback"
 
 	// 인증 후 유저 정보를 가져오기 위한 API
 	UserInfoAPIEndpoint = "https://www.googleapis.com/oauth2/v3/userinfo"
